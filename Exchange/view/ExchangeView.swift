@@ -39,15 +39,19 @@ class ExchangeView:UIViewController,AnyView,UITextFieldDelegate,UIViewController
     }
     @IBAction func cross_index(){
         indexes.reverse()
-        current?.value = currencies[indexes[0]]
-        target?.value = currencies[indexes[1]]
-        calculate()
+        if currencies.count > 0 {
+            current?.value = currencies[indexes[0]]
+            target?.value = currencies[indexes[1]]
+            calculate()
+        }
     }
     @objc func close_keyboard(){
-        self.value_field?.resignFirstResponder()
-        if let tempString = tempString , self.value_field?.text?.count == 0 {
-            self.value_field?.text = tempString
-            self.tempString = nil
+        DispatchQueue.main.async {
+            self.value_field?.resignFirstResponder()
+            if let tempString = self.tempString , self.value_field?.text?.count == 0 {
+                self.value_field?.text = tempString
+                self.tempString = nil
+            }
         }
     }
     func setCalculationString(calculation: NSAttributedString,rate:Double) {
@@ -62,11 +66,36 @@ class ExchangeView:UIViewController,AnyView,UITextFieldDelegate,UIViewController
         indexes = [0,1]
         self.current?.value = currencies[0]
         self.target?.value = currencies[1]
-        self.calculate()
+        DispatchQueue.main.async {
+            self.calculate()
+        }
+        
     }
     
     func onstate(state: AnyInteactorState) {
-        
+        DispatchQueue.main.async {
+        if state == .fail {
+            
+                self.close_keyboard()
+                let alert = UIAlertController(title: "Connection Error", message:"Please check your internet connection. Do you want try again", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction.init(title:"Cancel", style: .cancel, handler: {[weak self] _ in
+                    self?.current?.stopProgress()
+                    self?.target?.stopProgress()
+                    
+                }))
+                alert.addAction(UIAlertAction.init(title:"try", style: .default, handler: {[weak self] _ in
+                    self?.presenter?.loadData()
+                }))
+            self.present(alert, animated: true, completion: nil)
+            
+        }else if state == .success{
+            self.current?.isEnabled = true
+            self.target?.isEnabled = true
+            self.current?.isEnabled = true
+            self.target?.isEnabled = true
+        }
+        }
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.textColor = UIColor(named:"primary")
@@ -89,8 +118,23 @@ class ExchangeView:UIViewController,AnyView,UITextFieldDelegate,UIViewController
     func textFieldDidChangeSelection(_ textField: UITextField) {
         self.calculate()
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text{
+            if let textRange = Range.init(range, in: text){
+               let current_text = text.replacingCharacters(in: textRange, with: string)
+               
+                textField.text = current_text.thousendSep()
+            }
+            
+        }
+        return false
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.current?.isEnabled = false
+        self.target?.isEnabled = false
+        self.currency_values_field?.isHidden = true
         self.excahnge_button?.alpha = 0.7
         self.excahnge_button?.isEnabled  = false
         self.value_field?.delegate = self
@@ -107,11 +151,12 @@ class ExchangeView:UIViewController,AnyView,UITextFieldDelegate,UIViewController
     func calculate(){
         if indexes.filter({$0 == -1}).count == 0 {
             if let text = self.value_field?.text{
-                if let value = Double(text){
+                let value = text.toDouble()
                     self.excahnge_button?.isEnabled  = value > 0
                     self.excahnge_button?.alpha = value > 0 ? 1 : 0.7
+                    self.currency_values_field?.isHidden = false
                     presenter?.calculate(current: indexes[0], target: indexes[1], value: value)
-                }
+                
                
             }
            
@@ -128,7 +173,7 @@ class ExchangeView:UIViewController,AnyView,UITextFieldDelegate,UIViewController
             
         }))
         alert.addAction(UIAlertAction.init(title:"Confirm", style: .default, handler: {[weak self] _ in
-            if let value = Double(self?.value_field?.text ?? ""),let current = self?.indexes[0],let target = self?.indexes[1]{
+            if let value = self?.value_field?.text?.toDouble(),let current = self?.indexes[0],let target = self?.indexes[1]{
                 self?.presenter?.exchange(current:current , target:target, value: value)
             }
         }))
@@ -136,7 +181,7 @@ class ExchangeView:UIViewController,AnyView,UITextFieldDelegate,UIViewController
         
     }
     @IBAction func exchange(){
-        if let value = Double(self.value_field?.text ?? ""){
+        if let value = self.value_field?.text?.toDouble(){
             presenter?.needConfirm(current: indexes[0], target: indexes[1], value: value)
         }
         

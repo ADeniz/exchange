@@ -48,7 +48,7 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="USD" image="down">
+                                        <state key="normal" title="Currency" image="down">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -130,19 +130,18 @@
                                 </constraints>
                                 <color key="textColor" systemColor="systemGray4Color"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="49"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Final amount 12YTL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbG-hs-DsL">
-                                <rect key="frame" x="133.5" y="205" width="147" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbG-hs-DsL">
+                                <rect key="frame" x="20" y="205" width="374" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="147" id="KPa-ST-nHC"/>
                                     <constraint firstAttribute="height" constant="21" id="pmu-wV-8GA"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="12"/>
                                 <color key="textColor" name="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Final amount 12YTL" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5n-Dy-X7c">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5n-Dy-X7c">
                                 <rect key="frame" x="130" y="246" width="154" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="154" id="Rs3-Sa-QzH"/>
@@ -164,7 +163,9 @@
                             <constraint firstItem="Teg-oe-m92" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3rF-In-V6g"/>
                             <constraint firstItem="mbG-hs-DsL" firstAttribute="centerX" secondItem="xRt-Cg-jX3" secondAttribute="centerX" id="ACT-og-lPI"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="aW3-76-alt" secondAttribute="bottom" constant="-34" id="AUp-eH-O4J"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="mbG-hs-DsL" secondAttribute="trailing" constant="20" id="GB5-4t-bG5"/>
                             <constraint firstItem="a5n-Dy-X7c" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="J5F-30-LEw"/>
+                            <constraint firstItem="mbG-hs-DsL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="LIg-Kk-4dy"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="aW3-76-alt" secondAttribute="trailing" id="SYX-lI-Mvx"/>
                             <constraint firstItem="aW3-76-alt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Uxj-qz-7rP"/>
                             <constraint firstItem="a5n-Dy-X7c" firstAttribute="top" secondItem="mbG-hs-DsL" secondAttribute="bottom" constant="20" id="VW3-W6-lPs"/>
@@ -362,7 +363,7 @@
             <color red="0.37599998712539673" green="0.51399999856948853" blue="0.92199999094009399" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="textColor">
-            <color red="0.83099997043609619" green="0.83899998664855957" blue="0.83899998664855957" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.76024820044810859" green="0.76777541035353536" blue="0.76777541035353536" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

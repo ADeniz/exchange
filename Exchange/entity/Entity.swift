@@ -18,9 +18,9 @@ struct currency:Codable{
     var localeString:String{
         get{
             if self.symbol.count > 0 {
-                return "\(self.symbol) \(self.value.toFixedSizeLocaleString(len: 2))"
+                return "\(self.symbol) \(self.value.toFixedSizeLocaleStringIfNedded(len: 2))"
             }
-            return "\(self.value.toFixedSizeLocaleString(len: 2)) \(self.key) "
+            return "\(self.value.toFixedSizeLocaleStringIfNedded(len: 2)) \(self.key) "
         }
     }
 }
