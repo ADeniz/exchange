@@ -166,7 +166,7 @@ class ExchangeView:UIViewController,AnyView,UITextFieldDelegate,UIViewController
         }
     }
     func confirm(message: NSAttributedString) {
-        self.close_keyboard()
+       
         let alert = UIAlertController(title: "Confirm Operation", message:"kk", preferredStyle: .alert)
         alert.setValue(message, forKey: "attributedMessage")
         alert.addAction(UIAlertAction.init(title:"Cancel", style: .cancel, handler: { _ in
@@ -181,6 +181,7 @@ class ExchangeView:UIViewController,AnyView,UITextFieldDelegate,UIViewController
         
     }
     @IBAction func exchange(){
+        self.close_keyboard()
         if let value = self.value_field?.text?.toDouble(){
             presenter?.needConfirm(current: indexes[0], target: indexes[1], value: value)
         }
